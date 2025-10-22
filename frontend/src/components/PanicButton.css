@@ -1,0 +1,52 @@
+.panic-container {
+  text-align: center;
+}
+
+.panic-button {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid #c2185b;
+  background: linear-gradient(145deg, #e91e63, #c2185b);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+  outline: none;
+}
+
+.panic-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(233, 30, 99, 0.6);
+}
+
+.panic-button:active,
+.panic-button.pressed {
+  transform: scale(0.95);
+  background: linear-gradient(145deg, #c2185b, #880e4f);
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.8);
+}
+
+.panic-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.status-message {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: rgba(233, 30, 99, 0.1);
+  border: 2px solid #e91e63;
+  border-radius: 25px;
+  color: #880e4f;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.panic-info {
+  margin-top: 15px;
+  color: #ad1457;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,129 @@
+.map-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+  border: 2px solid rgba(233, 30, 99, 0.3);
+}
+
+.map-container h2 {
+  color: #880e4f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.map-placeholder {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+  border: 2px solid #f48fb1;
+  border-radius: 15px;
+  min-height: 400px;
+  padding: 20px;
+  position: relative;
+}
+
+.map-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.map-info h3 {
+  color: #880e4f;
+  margin-bottom: 10px;
+}
+
+.user-location {
+  background: rgba(233, 30, 99, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  color: #880e4f;
+  font-size: 14px;
+}
+
+.incidents-on-map {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.no-incidents {
+  text-align: center;
+  color: #ad1457;
+  padding: 40px;
+  font-style: italic;
+}
+
+.incident-marker {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e91e63;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.incident-marker:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.marker-icon {
+  font-size: 24px;
+  animation: pulse 2s infinite;
+}
+
+.incident-details {
+  flex: 1;
+}
+
+.incident-details strong {
+  color: #880e4f;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.incident-details p {
+  color: #c2185b;
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.view-map-btn {
+  display: inline-block;
+  background: #4caf50;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 12px;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.view-map-btn:hover {
+  background: #388e3c;
+  transform: scale(1.05);
+}
+
+.map-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(252, 228, 236, 0.5);
+  border-radius: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #880e4f;
+  font-size: 14px;
+}
+
+.legend-icon {
+  font-size: 18px;
+}

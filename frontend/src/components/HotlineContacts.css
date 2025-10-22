@@ -1,0 +1,70 @@
+.hotlines-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+  border: 2px solid rgba(233, 30, 99, 0.3);
+}
+
+.hotlines-container h2 {
+  color: #880e4f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.hotlines-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.hotline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(252, 228, 236, 0.7);
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: 1px solid #f48fb1;
+  transition: all 0.3s ease;
+}
+
+.hotline-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.hotline-info h3 {
+  color: #880e4f;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.hotline-number {
+  color: #e91e63;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.hotline-desc {
+  color: #c2185b;
+  font-size: 14px;
+}
+
+.call-btn {
+  background: linear-gradient(145deg, #4caf50, #388e3c);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.call-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}

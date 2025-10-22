@@ -1,0 +1,74 @@
+import React, { useState } from 'react';
+import './ContactsList.css';
+
+const ContactsList = () => {
+  const [contacts, setContacts] = useState([
+    { id: 1, name: 'Emergency Contact 1', phone: '+27722330418', type: 'Primary' },
+    { id: 2, name: 'Family Member', phone: '+27614861915', type: 'Family' },
+    { id: 3, name: 'Friend', phone: '+27731234567', type: 'Friend' },
+    { id: 4, name: 'Emergency Contact 2', phone: '000000000000', type: 'Primary' },
+    { id: 5, name: 'Family Member', phone: '000000000000', type: 'Family' },
+    { id: 6, name: 'Friend', phone: '000000000000', type: 'Friend' },
+    { id: 7, name: 'Emergency Contact 3', phone: '000000000000', type: 'Primary' },
+    { id: 8, name: 'Family Member', phone: '000000000000', type: 'Family' },
+    { id: 9, name: 'Friend', phone: '000000000000', type: 'Friend' }
+  ]);
+  const [newContact, setNewContact] = useState({ name: '', phone: '', type: 'Primary' });
+
+  const addContact = () => {
+    if (newContact.name && newContact.phone) {
+      setContacts([...contacts, { ...newContact, id: Date.now() }]);
+      setNewContact({ name: '', phone: '', type: 'Primary' });
+    }
+  };
+
+  const removeContact = (id) => {
+    setContacts(contacts.filter(contact => contact.id !== id));
+  };
+
+  return (
+    <div className="contacts-container">
+      <h2>Emergency Contacts</h2>
+      
+      <div className="add-contact">
+        <input
+          type="text"
+          placeholder="Name"
+          value={newContact.name}
+          onChange={(e) => setNewContact({...newContact, name: e.target.value})}
+        />
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          value={newContact.phone}
+          onChange={(e) => setNewContact({...newContact, phone: e.target.value})}
+        />
+        <select
+          value={newContact.type}
+          onChange={(e) => setNewContact({...newContact, type: e.target.value})}
+        >
+          <option value="Primary">Primary</option>
+          <option value="Family">Family</option>
+          <option value="Friend">Friend</option>
+        </select>
+        <button onClick={addContact}>Add</button>
+      </div>
+
+      <div className="contacts-list">
+        {contacts.map(contact => (
+          <div key={contact.id} className="contact-item">
+            <div className="contact-info">
+              <h3>{contact.name}</h3>
+              <p>{contact.phone}</p>
+              <span className="contact-type">{contact.type}</span>
+            </div>
+            <button onClick={() => removeContact(contact.id)} className="remove-btn">×</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ContactsList;
+

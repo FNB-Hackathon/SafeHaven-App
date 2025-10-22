@@ -1,79 +1,71 @@
-# SafeZone Demo (Hackathon Prototype)
+# SafeHaven - Personal Safety App
 
-A standalone demo showcasing a panic button and simulated emergency alert workflow, suitable for hackathon presentation. Includes a React (Vite + TypeScript) frontend and a Node/Express backend that simulates sending alerts and managing contacts.
+A React frontend with Node.js backend for personal safety featuring panic button, incident reporting, and SMS alerts.
+
+## Setup Instructions
+
+### Backend Setup
+1. Navigate to backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create `.env` file with Twilio credentials:
+   ```
+   TWILIO_SID=your_twilio_sid
+   TWILIO_AUTH_TOKEN=your_twilio_auth_token
+   TWILIO_PHONE=your_twilio_phone_number
+   TWILIO_WHATSAPP_NUMBER=+14155238886
+   PORT=5000
+   ```
+
+4. Start backend server:
+   ```bash
+   npm start
+   ```
+
+### Frontend Setup
+1. Navigate to frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create `.env` file:
+   ```
+   REACT_APP_EMERGENCY_CONTACT=+1234567890
+   ```
+
+4. Start frontend:
+   ```bash
+   npm start
+   ```
 
 ## Features
 
-- Panic button to trigger an alert
-- Smart detection simulation (button to simulate detection event)
-- Contacts list (mocked via backend)
-- Alert confirmation & status toasts
-- Simple report form
+- **Panic Button**: Large pink emergency button that sends SMS alerts with location
+- **Incident Reporting**: Form to report incidents with location tracking
+- **Real-time Alerts**: View recent alerts and incidents
+- **SMS & WhatsApp Notifications**: Automatic SMS and WhatsApp messages to emergency contacts via Twilio
+- **Location Services**: GPS location capture for emergency situations
+- **Pink Theme**: Calming pink color scheme throughout the interface
 
-## Tech Stack
+## Usage
 
-- Frontend: Vite + React + TypeScript, react-router-dom
-- Backend: Node.js + Express, CORS
+1. **Emergency**: Press the large PANIC button to send immediate SMS alert
+2. **Report Incident**: Use the form to report non-emergency incidents
+3. **View Alerts**: Monitor recent alerts in the alerts panel
+4. **Location**: Allow location access for accurate emergency positioning
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-
-### Setup
-
-1. Install dependencies
-
-```bash
-cd safezone-frontend && npm install
-cd ../safezone-backend && npm install
-```
-
-2. Run backend (port 4000)
-
-```bash
-npm run dev
-```
-
-Run the above inside `safezone-backend/`.
-
-3. Run frontend (port 5173)
-
-```bash
-npm run dev
-```
-
-Run the above inside `safezone-frontend/`.
-
-4. Open the app
-
-- http://localhost:5173
-
-## Frontend Scripts
-
-Inside `safezone-frontend/`:
-
-- `npm run dev` – start Vite dev server
-- `npm run build` – production build
-- `npm run preview` – preview production build
-
-## Backend Scripts
-
-Inside `safezone-backend/`:
-
-- `npm run dev` – start server with nodemon
-- `npm start` – start server
-
-## API Endpoints
-
-- `POST /api/alert` – simulate sending an alert
-- `GET /api/contacts` – get mocked emergency contacts
-- `POST /api/report` – submit a report payload
-
-## Pitch Guide (Cheat Sheet)
-
-- Problem: GBV is urgent; victims need fast, trusted help.
-- Solution: SafeZone demo with panic + smart detection.
-- Value: Aligns with FNB values (customer focus, simplicity, cost efficiency).
-- Impact: Saves lives, builds trust, positions FNB as an innovator.
+The app runs on:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5000

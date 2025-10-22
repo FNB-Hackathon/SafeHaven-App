@@ -1,0 +1,82 @@
+.contacts-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+  border: 2px solid rgba(233, 30, 99, 0.3);
+}
+
+.contacts-container h2 {
+  color: #880e4f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.add-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-contact input,
+.add-contact select {
+  padding: 10px;
+  border: 2px solid #f48fb1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.add-contact button {
+  padding: 10px 20px;
+  background: #e91e63;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.contacts-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(252, 228, 236, 0.7);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #f48fb1;
+}
+
+.contact-info h3 {
+  color: #880e4f;
+  margin-bottom: 5px;
+}
+
+.contact-info p {
+  color: #c2185b;
+  margin-bottom: 5px;
+}
+
+.contact-type {
+  background: #e91e63;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.remove-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 18px;
+}
