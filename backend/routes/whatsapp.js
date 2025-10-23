@@ -6,16 +6,15 @@ const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
 router.post('/', async (req, res) => {
   try {
     const { message, to } = req.body;
-    
     const whatsappMessage = await client.messages.create({
       body: message,
       from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
       to: `whatsapp:${to}`
     });
-
-    res.json({ success: true, sid: whatsappMessage.sid });
+    res.status(200).json({ success: true, sid: whatsappMessage.sid });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    const status = error.status || error.statusCode || 500;
+    res.status(status).json({ success: false, error: error.message, code: error.code, moreInfo: error.moreInfo });
   }
 });
 

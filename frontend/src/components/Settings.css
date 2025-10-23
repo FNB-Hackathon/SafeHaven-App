@@ -1,0 +1,239 @@
+.settings-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+.settings-container h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.settings-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.settings-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.settings-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.settings-description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.settings-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.btn-save,
+.btn-add {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-save:hover,
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-save:active,
+.btn-add:active {
+  transform: translateY(0);
+}
+
+.contacts-list {
+  margin: 20px 0;
+}
+
+.no-contacts {
+  text-align: center;
+  padding: 30px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-info strong {
+  font-size: 1.1rem;
+}
+
+.contact-phone {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.btn-remove {
+  padding: 8px 16px;
+  background: #ff4757;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+  background: #ff3838;
+  transform: scale(1.05);
+}
+
+.add-contact-form {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-section {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.info-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.info-section li {
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+}
+
+.info-section li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #4cd964;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.status-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(76, 217, 100, 0.95);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+  z-index: 1000;
+}
+
+@keyframes slideUp {
+  from {
+    bottom: -50px;
+    opacity: 0;
+  }
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 15px;
+  }
+
+  .settings-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .btn-save,
+  .btn-add {
+    width: 100%;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn-remove {
+    width: 100%;
+  }
+}

@@ -5,13 +5,7 @@ const ContactsList = () => {
   const [contacts, setContacts] = useState([
     { id: 1, name: 'Emergency Contact 1', phone: '+27722330418', type: 'Primary' },
     { id: 2, name: 'Family Member', phone: '+27614861915', type: 'Family' },
-    { id: 3, name: 'Friend', phone: '+27731234567', type: 'Friend' },
-    { id: 4, name: 'Emergency Contact 2', phone: '000000000000', type: 'Primary' },
-    { id: 5, name: 'Family Member', phone: '000000000000', type: 'Family' },
-    { id: 6, name: 'Friend', phone: '000000000000', type: 'Friend' },
-    { id: 7, name: 'Emergency Contact 3', phone: '000000000000', type: 'Primary' },
-    { id: 8, name: 'Family Member', phone: '000000000000', type: 'Family' },
-    { id: 9, name: 'Friend', phone: '000000000000', type: 'Friend' }
+    { id: 3, name: 'Friend', phone: '+27731234567', type: 'Friend' }
   ]);
   const [newContact, setNewContact] = useState({ name: '', phone: '', type: 'Primary' });
 

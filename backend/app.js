@@ -21,7 +21,7 @@ app.use('/api/panic', panicRouter);
 app.use('/api/heatmap', heatmapRouter);
 app.use('/api/whatsapp', whatsappRouter);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

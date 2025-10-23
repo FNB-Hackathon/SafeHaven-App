@@ -1,0 +1,47 @@
+PODS:
+  - Capacitor (7.4.4):
+    - CapacitorCordova
+  - CapacitorApp (7.1.0):
+    - Capacitor
+  - CapacitorBrowser (7.0.2):
+    - Capacitor
+  - CapacitorCordova (7.4.4)
+  - CapacitorGeolocation (7.1.5):
+    - Capacitor
+    - IONGeolocationLib (= 1.0.1)
+  - IONGeolocationLib (1.0.1)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
+
+SPEC REPOS:
+  trunk:
+    - IONGeolocationLib
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorApp:
+    :path: "../../node_modules/@capacitor/app"
+  CapacitorBrowser:
+    :path: "../../node_modules/@capacitor/browser"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorGeolocation:
+    :path: "../../node_modules/@capacitor/geolocation"
+
+SPEC CHECKSUMS:
+  Capacitor: 358dd1c3fdd71d969547b17e159fd8a7736cb45f
+  CapacitorApp: 26587c2ce485d88ddb39adb21cac64f8e481afe3
+  CapacitorBrowser: 22541e48442de44dc629c214388290d6eecc6ae9
+  CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
+  CapacitorGeolocation: 84f868bea4c2499aebc3bb3a88fd0a508f87ab87
+  IONGeolocationLib: 20f9d0248a0b5264511fb57a37e25dd2badf797a
+
+PODFILE CHECKSUM: 3ba532d9f577c2ccefb5197d312eecaaf661ec00
+
+COCOAPODS: 1.16.2

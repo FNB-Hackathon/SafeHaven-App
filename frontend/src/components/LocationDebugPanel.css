@@ -1,0 +1,208 @@
+.location-debug-panel {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.location-debug-panel h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.debug-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.debug-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.debug-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.debug-value {
+  font-size: 16px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.method-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}
+
+.permission-granted {
+  color: #4caf50;
+}
+
+.permission-denied {
+  color: #f44336;
+}
+
+.permission-prompt {
+  color: #ff9800;
+}
+
+.debug-address {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.debug-address-text {
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.debug-error {
+  background: rgba(244, 67, 54, 0.3);
+  border: 1px solid rgba(244, 67, 54, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.debug-map-link {
+  text-align: center;
+}
+
+.debug-map-link a {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.debug-map-link a:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.manual-override-section {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.manual-override-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.manual-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.coord-input {
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.coord-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.coord-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.manual-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.set-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.set-btn:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.clear-btn {
+  background: #f44336;
+  color: white;
+}
+
+.clear-btn:hover {
+  background: #da190b;
+  transform: translateY(-1px);
+}
+
+.manual-active {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.manual-active p {
+  margin: 0;
+  font-size: 14px;
+  background: rgba(76, 175, 80, 0.3);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+@media (max-width: 768px) {
+  .debug-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .location-debug-panel {
+    padding: 15px;
+  }
+  
+  .debug-value {
+    font-size: 14px;
+  }
+}

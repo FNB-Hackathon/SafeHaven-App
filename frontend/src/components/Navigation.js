@@ -8,6 +8,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
     { id: 'reports', label: 'Reports', icon: '📝' },
     { id: 'hotlines', label: 'Hotlines', icon: '📞' },
     { id: 'map', label: 'Map', icon: '🗺️' },
+    { id: 'settings', label: 'Settings', icon: '⚙️' },
   ];
 
   return (

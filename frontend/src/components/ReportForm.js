@@ -32,11 +32,20 @@ const ReportForm = ({ onReportSubmit }) => {
         location: location || 'Not specified'
       });
 
-      // Send WhatsApp notification for incident report
-      await axios.post('/api/whatsapp', {
-        message: `📝 ${incidentType.toUpperCase()} INCIDENT: ${description}. Location: ${location || 'Not specified'}. Reported via SafeHaven app.`,
-        to: process.env.REACT_APP_EMERGENCY_CONTACT || '+1234567890'
-      });
+      // Send WhatsApp notification for incident report via native WhatsApp links (no Twilio)
+      const envList = process.env.REACT_APP_EMERGENCY_CONTACTS || process.env.REACT_APP_EMERGENCY_CONTACT || '';
+      const emergencyContacts = envList
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (emergencyContacts.length > 0) {
+        const msg = `📝 ${incidentType.toUpperCase()} INCIDENT: ${description}. Location: ${location || 'Not specified'}. Reported via SafeHaven app.`;
+        emergencyContacts.forEach((to, idx) => {
+          const number = to.replace(/[^\d+]/g, '');
+          const url = `https://wa.me/${encodeURIComponent(number)}?text=${encodeURIComponent(msg)}`;
+          setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), idx * 300);
+        });
+      }
       
       setDescription('');
       setLocation('');
@@ -48,28 +57,97 @@ const ReportForm = ({ onReportSubmit }) => {
     setIsSubmitting(false);
   };
 
-  const getCurrentLocation = useCallback(() => {
+  const getCurrentLocation = useCallback(async () => {
+    // Check for manual override first
+    const saved = localStorage.getItem('safehaven_manual_location');
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        setLocation(`${data.address} (${data.latitude}, ${data.longitude}) ±0m [Manual]`);
+        return;
+      } catch (e) {
+        console.error('Failed to load manual location:', e);
+      }
+    }
+
+    try {
+      if (navigator.permissions && navigator.permissions.query) {
+        const res = await navigator.permissions.query({ name: 'geolocation' });
+        if (res && res.state === 'denied') {
+          // Do not alert; provide best-effort fallback below
+        }
+      }
+    } catch (_) {}
+
+    const tryGoogleGeolocationFallback = async () => {
+      try {
+        const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+        if (!apiKey) return false;
+        const geoResp = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`, { method: 'POST' });
+        if (!geoResp.ok) return false;
+        const geoData = await geoResp.json();
+        if (geoData && geoData.location && geoData.location.lat && geoData.location.lng) {
+          const { lat, lng } = geoData.location;
+          try {
+            const address = await getAddressFromCoords(lat, lng);
+            const acc = geoData.accuracy || 500;
+            setLocation(`${address} (${Number(lat).toFixed(6)}, ${Number(lng).toFixed(6)}) ±${Math.round(acc)}m [Network]`);
+          } catch {
+            const acc = geoData.accuracy || 500;
+            setLocation(`${Number(lat).toFixed(6)}, ${Number(lng).toFixed(6)} ±${Math.round(acc)}m [Network]`);
+          }
+          return true;
+        }
+      } catch (_) {}
+      return false;
+    };
+
+    const tryIpFallback = async () => {
+      try {
+        const resp = await fetch('https://ipapi.co/json');
+        const data = await resp.json();
+        if (data) {
+          const approx = [data.city, data.region, data.country_name].filter(Boolean).join(', ');
+          if (data.latitude && data.longitude) {
+            setLocation(`Approximate: ${approx} (${Number(data.latitude).toFixed(6)}, ${Number(data.longitude).toFixed(6)}) [IP]`);
+            return true;
+          }
+          if (approx) {
+            setLocation(`Approximate: ${approx}`);
+            return true;
+          }
+        }
+      } catch (_) {}
+      return false;
+    };
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const { latitude, longitude } = position.coords;
+          const { latitude, longitude, accuracy } = position.coords;
           try {
             const address = await getAddressFromCoords(latitude, longitude);
-            setLocation(`${address} (${latitude.toFixed(6)}, ${longitude.toFixed(6)})`);
+            setLocation(`${address} (${latitude.toFixed(6)}, ${longitude.toFixed(6)}) ±${Math.round(accuracy)}m [GPS]`);
           } catch {
-            setLocation(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+            setLocation(`${latitude.toFixed(6)}, ${longitude.toFixed(6)} ±${Math.round(accuracy)}m [GPS]`);
           }
         },
-        () => {
-          alert('Unable to get location');
-        }
+        async (err) => {
+          const ok = await tryGoogleGeolocationFallback();
+          if (!ok) {
+            const okIp = await tryIpFallback();
+            if (!okIp) setLocation('Location unavailable');
+          }
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
       );
+    } else {
+      alert('Location not supported');
     }
   }, []);
 
   useEffect(() => {
-    getCurrentLocation();
-  }, [getCurrentLocation]);
+  }, []);
 
   const getAddressFromCoords = async (lat, lng) => {
     const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
