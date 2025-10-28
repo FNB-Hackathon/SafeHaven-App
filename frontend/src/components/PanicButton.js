@@ -130,31 +130,7 @@ const PanicButton = () => {
               3: 'Timeout getting position. Try again.'
             };
             setStatus(map[err && err.code] || 'Unable to get location');
-            // Fallback 1: Google Geolocation API (network-based lat/lng)
-            try {
-              const geoResp = await fetch(
-                `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
-                { method: 'POST' }
-              );
-              if (geoResp.ok) {
-                const geoData = await geoResp.json();
-                if (geoData && geoData.location && geoData.location.lat && geoData.location.lng) {
-                  const { lat, lng } = geoData.location;
-                  try {
-                    const address = await getAddressFromCoords(lat, lng);
-                    const acc = geoData.accuracy || 500;
-                    resolve(`${address} (${Number(lat).toFixed(6)}, ${Number(lng).toFixed(6)}) ±${Math.round(acc)}m [Network]`);
-                    return;
-                  } catch (_) {
-                    const acc = geoData.accuracy || 500;
-                    resolve(`${Number(lat).toFixed(6)}, ${Number(lng).toFixed(6)} ±${Math.round(acc)}m [Network]`);
-                    return;
-                  }
-                }
-              }
-            } catch (_) {}
-
-            // Fallback 2: IP-based approximate location
+            // Fallback: IP-based approximate location
             try {
               const resp = await fetch('https://ipapi.co/json');
               const data = await resp.json();
@@ -183,18 +159,19 @@ const PanicButton = () => {
 
   const getAddressFromCoords = async (lat, lng) => {
     try {
-      const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-      if (!apiKey) {
-        return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
-      }
-      
+      // Use free OpenStreetMap Nominatim API for reverse geocoding
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
+        {
+          headers: {
+            'User-Agent': 'SafeHaven Emergency App'
+          }
+        }
       );
       const data = await response.json();
       
-      if (data.results && data.results[0]) {
-        return data.results[0].formatted_address;
+      if (data && data.display_name) {
+        return data.display_name;
       }
       return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
     } catch (error) {
