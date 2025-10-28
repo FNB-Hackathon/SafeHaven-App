@@ -114,14 +114,9 @@ const PanicButton = () => {
     return new Promise((resolve) => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          async (position) => {
+          (position) => {
             const { latitude, longitude, accuracy } = position.coords;
-            try {
-              const address = await getAddressFromCoords(latitude, longitude);
-              resolve(`${address} (${latitude.toFixed(6)}, ${longitude.toFixed(6)}) ±${Math.round(accuracy)}m [GPS]`);
-            } catch {
-              resolve(`Lat: ${latitude.toFixed(6)}, Lng: ${longitude.toFixed(6)} ±${Math.round(accuracy)}m [GPS]`);
-            }
+            resolve(`GPS Location: ${latitude.toFixed(6)}, ${longitude.toFixed(6)} (±${Math.round(accuracy)}m)`);
           },
           async (err) => {
             const map = {
@@ -134,16 +129,10 @@ const PanicButton = () => {
             try {
               const resp = await fetch('https://ipapi.co/json');
               const data = await resp.json();
-              if (data) {
+              if (data && data.latitude && data.longitude) {
                 const approx = [data.city, data.region, data.country_name].filter(Boolean).join(', ');
-                if (data.latitude && data.longitude) {
-                  resolve(`Approximate: ${approx} (${Number(data.latitude).toFixed(6)}, ${Number(data.longitude).toFixed(6)}) [IP]`);
-                  return;
-                }
-                if (approx) {
-                  resolve(`Approximate: ${approx}`);
-                  return;
-                }
+                resolve(`Approximate Location: ${approx} (${Number(data.latitude).toFixed(6)}, ${Number(data.longitude).toFixed(6)})`);
+                return;
               }
             } catch (_) {}
             resolve('Location unavailable');
@@ -157,27 +146,7 @@ const PanicButton = () => {
     });
   };
 
-  const getAddressFromCoords = async (lat, lng) => {
-    try {
-      // Use free OpenStreetMap Nominatim API for reverse geocoding
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
-        {
-          headers: {
-            'User-Agent': 'SafeHaven Emergency App'
-          }
-        }
-      );
-      const data = await response.json();
-      
-      if (data && data.display_name) {
-        return data.display_name;
-      }
-      return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
-    } catch (error) {
-      return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
-    }
-  };
+
 
   return (
     <div className="panic-container">
