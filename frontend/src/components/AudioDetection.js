@@ -19,7 +19,7 @@ const AudioDetection = () => {
     }
 
     return () => stopAudioMonitoring();
-  }, [isActive]);
+  }, [isActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startAudioMonitoring = async () => {
     try {

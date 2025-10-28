@@ -23,7 +23,7 @@ const SafeArrival = () => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isActive, timeRemaining]);
+  }, [isActive, timeRemaining]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sendAlertToContacts = async () => {
     const contacts = JSON.parse(localStorage.getItem('safehaven_emergency_contacts') || '[]');

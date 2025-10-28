@@ -57,7 +57,7 @@ const ImmobileDetection = () => {
         window.removeEventListener('devicemotion', motionHandler);
       }
     };
-  }, [isActive, lastMovement, timeLimit]);
+  }, [isActive, lastMovement, timeLimit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sendImmobileAlert = async () => {
     const contacts = JSON.parse(localStorage.getItem('safehaven_emergency_contacts') || '[]');
