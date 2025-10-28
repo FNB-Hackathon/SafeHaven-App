@@ -50,17 +50,36 @@
 }
 
 .tracking-active {
-  text-align: center;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
 }
 
-.timer {
-  font-size: 24px;
+.journey-info {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #555;
+}
+
+.value {
   font-weight: bold;
   color: #333;
-  margin-bottom: 15px;
 }
 
 .confirm-btn {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './PanicButton.css';
 
 const PanicButton = () => {
@@ -59,43 +58,18 @@ const PanicButton = () => {
         return;
       }
       
-      // Get user's phone number from localStorage or environment
-      const userPhone = localStorage.getItem('safehaven_user_phone') || 
-                       process.env.REACT_APP_USER_PHONE || 
-                       'Unknown';
+
       
-      // Format location with link
-      const locationWithLink = locationLink 
-        ? `${location}\nMap: ${locationLink}` 
-        : location;
+      // Send WhatsApp messages to emergency contacts
+      const message = `🚨 EMERGENCY ALERT 🚨\n\nPANIC BUTTON ACTIVATED - Immediate assistance required!\n\nLocation: ${location}${locationLink ? `\nMap: ${locationLink}` : ''}\n\nThis is an automated SafeHaven panic alert.`;
       
-      // Send SMS alerts via backend
-      const smsResponse = await axios.post('/api/panic/alert', {
-        phone: userPhone,
-        location: locationWithLink,
-        message: 'PANIC BUTTON ACTIVATED - Immediate assistance required!',
-        contacts: contactsList
-      });
-      
-      if (smsResponse.data.success) {
-        setStatus('SMS alerts sent successfully!');
-      } else {
-        setStatus('Some SMS alerts failed to send.');
-      }
-      
-      // Also send WhatsApp messages (as backup/additional channel)
-      const message = `🚨 EMERGENCY ALERT: Help needed at ${location}. ${locationLink ? `Map: ${locationLink}. ` : ''}This is an automated SafeHaven panic alert.`;
-      emergencyContacts.forEach((contact, idx) => {
-        const number = contact.replace(/[^\d+]/g, '');
+      contactsList.forEach((contact, idx) => {
+        const number = contact.phone.replace(/[^\d+]/g, '');
         const url = `https://wa.me/${encodeURIComponent(number)}?text=${encodeURIComponent(message)}`;
         setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), idx * 300);
       });
-
-      // Create incident report
-      await axios.post('/api/reports', {
-        description: 'Emergency panic button activated',
-        location: location
-      });
+      
+      setStatus(`Emergency alerts sent to ${contactsList.length} contacts!`);
 
       setTimeout(() => {
         setIsPressed(false);
@@ -208,18 +182,24 @@ const PanicButton = () => {
   };
 
   const getAddressFromCoords = async (lat, lng) => {
-    const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-    if (!apiKey) throw new Error('No API key');
-    
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`
-    );
-    const data = await response.json();
-    
-    if (data.results && data.results[0]) {
-      return data.results[0].formatted_address;
+    try {
+      const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+      if (!apiKey) {
+        return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
+      }
+      
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`
+      );
+      const data = await response.json();
+      
+      if (data.results && data.results[0]) {
+        return data.results[0].formatted_address;
+      }
+      return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
+    } catch (error) {
+      return `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
     }
-    throw new Error('No address found');
   };
 
   return (

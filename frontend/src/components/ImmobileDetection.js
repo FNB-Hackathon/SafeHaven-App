@@ -3,12 +3,12 @@ import './ImmobileDetection.css';
 
 const ImmobileDetection = () => {
   const [isActive, setIsActive] = useState(false);
-  const [timeLimit, setTimeLimit] = useState(5);
+  const [alertThreshold] = useState(2); // Fixed at 2 minutes
   const [lastMovement, setLastMovement] = useState(Date.now());
-  const [timeRemaining, setTimeRemaining] = useState(0);
+  const [noMovementPeriod, setNoMovementPeriod] = useState(0);
   const [movementCount, setMovementCount] = useState(0);
-  const [showWarning, setShowWarning] = useState(false);
   const [status, setStatus] = useState('');
+  const [alertSent, setAlertSent] = useState(false);
 
   useEffect(() => {
     let interval;
@@ -17,17 +17,12 @@ const ImmobileDetection = () => {
     if (isActive) {
       interval = setInterval(() => {
         const timeSinceMovement = (Date.now() - lastMovement) / 1000;
-        const remaining = Math.max(0, timeLimit * 60 - timeSinceMovement);
+        setNoMovementPeriod(timeSinceMovement);
         
-        setTimeRemaining(remaining);
-        
-        if (timeSinceMovement >= 120 && !showWarning) {
-          setShowWarning(true);
-        }
-        
-        if (remaining <= 0) {
+        // Send alert after 2 minutes of no movement
+        if (timeSinceMovement >= alertThreshold * 60 && !alertSent) {
           sendImmobileAlert();
-          setIsActive(false);
+          setAlertSent(true);
         }
       }, 1000);
 
@@ -41,7 +36,7 @@ const ImmobileDetection = () => {
           if (totalAcceleration > 2) {
             setLastMovement(Date.now());
             setMovementCount(prev => prev + 1);
-            setShowWarning(false);
+            setAlertSent(false); // Reset alert status on movement
           }
         }
       };
@@ -57,36 +52,42 @@ const ImmobileDetection = () => {
         window.removeEventListener('devicemotion', motionHandler);
       }
     };
-  }, [isActive, lastMovement, timeLimit]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isActive, lastMovement, alertThreshold, alertSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sendImmobileAlert = async () => {
     const contacts = JSON.parse(localStorage.getItem('safehaven_emergency_contacts') || '[]');
     const userName = localStorage.getItem('safehaven_user_name') || 'Someone';
     const userPhone = localStorage.getItem('safehaven_user_phone') || 'Unknown';
     
-    const message = `🚨 IMMOBILE ALERT 🚨\\n\\n${userName} (${userPhone}) has been immobile for ${timeLimit} minutes.\\n\\nPlease check on them immediately!\\n\\nThis could indicate an emergency situation.`;
+    const message = `🚨 IMMOBILE ALERT 🚨\n\n${userName} (${userPhone}) has been immobile for ${alertThreshold} minutes.\n\nLast movement: ${new Date(lastMovement).toLocaleTimeString()}\n\nPlease check on them immediately!\n\nThis could indicate an emergency situation.`;
     
     contacts.forEach((contact, idx) => {
-      const cleanNumber = contact.phone.replace(/[^\\d]/g, '');
+      const cleanNumber = contact.phone.replace(/[^\d]/g, '');
       const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
       setTimeout(() => window.open(url, '_blank'), idx * 500);
     });
     
     setStatus('Immobile alert sent to emergency contacts!');
   };
+  
+  const notifyImOkay = () => {
+    setLastMovement(Date.now());
+    setMovementCount(prev => prev + 1);
+    setAlertSent(false);
+    setStatus('Confirmed you are okay - monitoring continues');
+  };
 
   const startDetection = () => {
     setIsActive(true);
     setLastMovement(Date.now());
     setMovementCount(0);
-    setShowWarning(false);
-    setStatus(`Immobile detection started (${timeLimit} min limit)`);
+    setAlertSent(false);
+    setStatus(`Immobile detection started (${alertThreshold} min threshold)`);
   };
 
   const stopDetection = () => {
     setIsActive(false);
-    setTimeRemaining(0);
-    setShowWarning(false);
+    setAlertSent(false);
     setStatus('Immobile detection stopped');
   };
 
@@ -105,20 +106,10 @@ const ImmobileDetection = () => {
       </div>
 
       <div className="alert-section">
-        <label className="alert-label">Alert After No Movement For:</label>
-        <select 
-          value={timeLimit} 
-          onChange={(e) => setTimeLimit(parseInt(e.target.value))}
-          disabled={isActive}
-          className="time-select"
-        >
-          <option value={2}>2 minutes</option>
-          <option value={5}>5 minutes</option>
-          <option value={15}>15 minutes</option>
-          <option value={30}>30 minutes</option>
-          <option value={60}>1 hour</option>
-          <option value={120}>2 hours</option>
-        </select>
+        <div className="threshold-info">
+          <span className="label">Alert threshold:</span>
+          <span className="value">{alertThreshold} minutes</span>
+        </div>
       </div>
 
       <div className="how-it-works">
@@ -137,21 +128,29 @@ const ImmobileDetection = () => {
         </button>
       ) : (
         <div className="monitoring-active">
-          <div className="timer-display">
-            Time until alert: {formatTime(timeRemaining)}
-          </div>
           <div className="movement-stats">
-            <div>Movement count: {movementCount}</div>
-            <div>Last movement: {Math.floor((Date.now() - lastMovement) / 1000)}s ago</div>
-          </div>
-          {showWarning && (
-            <div className="warning-alert">
-              ⚠️ WARNING: No movement detected for 2+ minutes!
+            <div className="stat-item">
+              <span className="label">No movement for:</span>
+              <span className="value">{formatTime(noMovementPeriod)}</span>
             </div>
-          )}
-          <button onClick={stopDetection} className="stop-monitoring-btn">
-            Stop Monitoring
-          </button>
+            <div className="stat-item">
+              <span className="label">Last movement:</span>
+              <span className="value">{new Date(lastMovement).toLocaleTimeString()}</span>
+            </div>
+            <div className="stat-item">
+              <span className="label">Movement detected:</span>
+              <span className="value">{movementCount} times</span>
+            </div>
+          </div>
+          
+          <div className="action-buttons">
+            <button onClick={notifyImOkay} className="im-okay-btn">
+              ✅ I'm Okay
+            </button>
+            <button onClick={stopDetection} className="stop-monitoring-btn">
+              Stop Monitoring
+            </button>
+          </div>
         </div>
       )}
       
