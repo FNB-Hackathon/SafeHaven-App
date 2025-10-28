@@ -27,10 +27,13 @@ const ReportForm = ({ onReportSubmit }) => {
 
     setIsSubmitting(true);
     try {
-      await axios.post('/api/reports', {
+      const response = await axios.post('http://localhost:5050/api/reports', {
         description: `[${incidentType}] ${description}`,
         location: location || 'Not specified'
       });
+      
+      console.log('Report submitted successfully:', response.data);
+      alert('Report submitted successfully!');
 
       // Send WhatsApp notification for incident report via native WhatsApp links (no Twilio)
       const envList = process.env.REACT_APP_EMERGENCY_CONTACTS || process.env.REACT_APP_EMERGENCY_CONTACT || '';
@@ -50,9 +53,10 @@ const ReportForm = ({ onReportSubmit }) => {
       setDescription('');
       setLocation('');
       setIncidentType('General');
-      onReportSubmit();
+      if (onReportSubmit) onReportSubmit();
     } catch (error) {
       console.error('Error submitting report:', error);
+      alert(`Error submitting report: ${error.message}`);
     }
     setIsSubmitting(false);
   };

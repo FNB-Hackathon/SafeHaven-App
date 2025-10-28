@@ -1,0 +1,168 @@
+.signup-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: white;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: white;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff6b9d;
+  background: white;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.signup-btn {
+  width: 100%;
+  background: #ff6b9d;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.signup-btn:hover {
+  background: #ff5a8a;
+}
+
+.status-message {
+  text-align: center;
+  padding: 10px;
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.features-info {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.features-info h3 {
+  margin: 0 0 15px 0;
+  color: white;
+}
+
+.features-info ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.features-info li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.success-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-message h2 {
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.user-info h3 {
+  margin: 0 0 15px 0;
+  color: white;
+}
+
+.user-info p {
+  margin: 8px 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.continue-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 20px;
+}
+
+.continue-btn:hover {
+  background: #45a049;
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .signup-form h2 {
+    font-size: 24px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+  }
+}

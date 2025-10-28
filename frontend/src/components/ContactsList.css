@@ -80,3 +80,26 @@
   cursor: pointer;
   font-size: 18px;
 }
+
+.no-contacts {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+}
+
+.save-status {
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.save-status p {
+  color: #4CAF50;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}

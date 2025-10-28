@@ -1,0 +1,136 @@
+.following-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.following-header h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.tracking-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.active {
+  background-color: #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.status-dot.inactive {
+  background-color: #666;
+}
+
+.status-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tracking-stats {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.stat-item:last-child {
+  margin-bottom: 0;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-value {
+  font-weight: bold;
+  color: white;
+}
+
+.tracking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.check-in-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.check-in-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.stop-tracking-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stop-tracking-btn:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+}
+
+.start-tracking-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.start-tracking-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}

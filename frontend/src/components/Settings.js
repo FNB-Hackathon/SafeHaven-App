@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Settings.css';
 
 const Settings = () => {
+  const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [contacts, setContacts] = useState([]);
   const [newContact, setNewContact] = useState({ name: '', phone: '' });
@@ -9,9 +10,11 @@ const Settings = () => {
 
   useEffect(() => {
     // Load saved data
+    const savedName = localStorage.getItem('safehaven_user_name') || '';
     const savedPhone = localStorage.getItem('safehaven_user_phone') || '';
     const savedContacts = localStorage.getItem('safehaven_emergency_contacts');
     
+    setUserName(savedName);
     setUserPhone(savedPhone);
     
     if (savedContacts) {
@@ -77,6 +80,15 @@ const Settings = () => {
   return (
     <div className="settings-container">
       <h2>⚙️ Settings</h2>
+      
+      {/* User Info Section */}
+      <div className="settings-section">
+        <h3>User Information</h3>
+        <div className="user-info">
+          <p><strong>Name:</strong> {userName || 'Not set'}</p>
+          <p><strong>Phone:</strong> {userPhone || 'Not set'}</p>
+        </div>
+      </div>
       
       {/* User Phone Number Section */}
       <div className="settings-section">

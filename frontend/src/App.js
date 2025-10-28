@@ -10,12 +10,20 @@ import IncidentMap from './components/IncidentMap';
 import Navigation from './components/Navigation';
 import LocationDebugPanel from './components/LocationDebugPanel';
 import Settings from './components/Settings';
+import SafeArrival from './components/SafeArrival';
+import ImmobileDetection from './components/ImmobileDetection';
+import AudioDetection from './components/AudioDetection';
+import SignUp from './components/SignUp';
+import Following from './components/Following';
 import axios from 'axios';
 import './App.css';
 
 function App() {
   const [alerts, setAlerts] = useState([]);
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState(() => {
+    const hasUser = localStorage.getItem('safehaven_user_name');
+    return hasUser ? 'home' : 'signup';
+  });
 
   useEffect(() => {
     fetchAlerts();
@@ -208,6 +216,16 @@ function App() {
         return <IncidentMap />;
       case 'settings':
         return <Settings />;
+      case 'safearrival':
+        return <SafeArrival />;
+      case 'immobile':
+        return <ImmobileDetection />;
+      case 'audio':
+        return <AudioDetection />;
+      case 'signup':
+        return <SignUp onSignupComplete={() => setActiveTab('home')} />;
+      case 'following':
+        return <Following />;
       default:
         return (
           <>

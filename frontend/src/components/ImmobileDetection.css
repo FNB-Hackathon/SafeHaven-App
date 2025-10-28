@@ -1,0 +1,151 @@
+.immobile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.immobile-container h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.description {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.alert-section {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.alert-label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.time-select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+}
+
+.how-it-works {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.how-it-works h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-item {
+  color: #555;
+  font-size: 14px;
+}
+
+.start-monitoring-btn {
+  width: 100%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.start-monitoring-btn:hover {
+  background: #45a049;
+}
+
+.monitoring-active {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.timer-display {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.movement-stats {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.warning-alert {
+  background: #ff4444;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-weight: bold;
+  text-align: center;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.stop-monitoring-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.stop-monitoring-btn:hover {
+  background: #d32f2f;
+}
+
+.status-message {
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  font-weight: bold;
+  color: #333;
+}
